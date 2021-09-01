@@ -1,0 +1,27 @@
+@import '/src/styles/variables';
+
+button{
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: $very_dark;
+  color: white;
+  width: 115px;
+  height: 48px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 23px;
+  font-weight: 600;
+  @media(max-width: 967px) {
+    width: 144px;
+  }
+}
+button:active {
+  background-color: $primary-light;
+  color: $very_dark;
+}
+.active-button{
+  background-color: $primary;
+  color: $very_dark;
+}

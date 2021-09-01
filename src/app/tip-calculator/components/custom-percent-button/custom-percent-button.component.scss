@@ -1,0 +1,22 @@
+@import '/src/styles/variables';
+
+
+input{
+  padding: 0;
+  width: 105px;
+  padding-right: 15px;
+  height: 48px;
+  cursor: pointer;
+  color: $very_dark;
+  font-weight: 600;
+  font-size: 22px;
+  border: 0;
+  background-color: $light_grayish2;
+  text-align: right;
+  @media(max-width: 967px) {
+    width: 129px;
+  }
+}
+input:focus{
+  outline-color: $primary;
+}

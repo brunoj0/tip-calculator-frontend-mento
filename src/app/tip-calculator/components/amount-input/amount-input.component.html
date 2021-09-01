@@ -1,0 +1,23 @@
+<div class="label-container">
+  <label class="label">
+    {{label}}
+  </label>
+  <span *ngIf="error" class="error-massage">
+    Can't be zero
+  </span>
+</div>
+
+<div class="input-container">
+  <span class="icon"
+    [ngClass]="{'dollar': icon === iconsEnum.Dollar,
+      'person': icon ===iconsEnum.Person
+  }">
+  </span>
+  <input
+    [class.error]="error"
+    placeholder="0"
+    type="number"
+    [value]="inputValue"
+    (input)="inputValueChanged($event)"
+  />
+</div>

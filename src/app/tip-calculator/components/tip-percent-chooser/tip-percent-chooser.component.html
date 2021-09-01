@@ -1,0 +1,8 @@
+<label>
+  Select Tip %
+</label>
+
+<div class="button-container">
+  <app-percent-button *ngFor="let button of buttons" [button]="button" (click)="percentChange(button.value)"></app-percent-button>
+  <app-custom-percent-button (buttonValueChanged)="percentChange($event)"></app-custom-percent-button>
+</div>

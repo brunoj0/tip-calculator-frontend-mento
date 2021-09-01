@@ -1,0 +1,75 @@
+@import '/src/styles/variables';
+
+:host{
+  position: relative;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-container {
+  position: relative;
+}
+.label-container {
+  margin-bottom: 10px;
+  display: flex;
+  font-weight: 900;
+  color: $dark_grayish2;
+}
+
+.error-massage{
+  color: red;
+  margin-left: auto;
+}
+
+.icon{
+  display: inline-block;
+  position: absolute;
+  color: $dark_grayish2;
+  top: 50%;
+  margin-top: -9px;
+  left: 19px;
+  height: 18px;
+  width: 12px;
+  background: url("/assets/icon-dollar.svg");
+}
+
+.dollar{
+  background: url("/assets/icon-dollar.svg");
+  background-size: 12px 18px;
+
+}
+
+.person{
+  height: 17px;
+  width: 11px;
+  background: url("/assets/icon-person.svg");
+  background-size: 11px 17px;
+}
+
+input{
+  cursor: pointer;
+  color: $very_dark;
+  font-weight: 600;
+  font-size: 22px;
+  padding-right: 18px;
+  border: 0;
+  background-color: $light_grayish2;
+  width: 380px;
+  height: 47px;
+  text-align: right;
+  @media(max-width: 967px) {
+    width: calc(100% - 18px)
+  }
+}
+input::placeholder {
+  color: $light_grayish1;
+}
+input:focus{
+  outline-color: $primary;
+}
+
+.error:focus{
+    outline-color: red;
+}

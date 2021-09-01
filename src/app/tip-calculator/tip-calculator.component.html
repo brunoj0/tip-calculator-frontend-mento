@@ -1,0 +1,28 @@
+<form [formGroup]="formGroup">
+
+  <div class="form-container">
+    <app-amount-input
+      [icon]="Icon.Dollar"
+      label="Bill"
+      formControlName="bill"
+    >
+    </app-amount-input>
+    <app-tip-percent-chooser
+      formControlName="tipPercent"
+    >
+
+    </app-tip-percent-chooser>
+    <app-amount-input
+      [icon]="Icon.Person"
+      [error]="formGroup.get('numberOfPeople').errors?.forbiddenValue"
+      label="Number of People"
+      formControlName="numberOfPeople">
+    </app-amount-input>
+  </div>
+
+  <app-tip-summary
+   [total]="total$ | async"
+   [tipAmount]="tipAmount$ | async"
+  >
+  </app-tip-summary>
+</form>

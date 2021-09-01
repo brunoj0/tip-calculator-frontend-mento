@@ -1,0 +1,25 @@
+@import '/src/styles/variables';
+
+.amount-container{
+  display: flex;
+  justify-content: space-between;
+}
+.label-container{
+  display: flex;
+  flex-direction: column;
+}
+.amount-label{
+  color:$white;
+}
+
+.amount-sub-label{
+  color: $dark_grayish1;
+
+}
+
+.amount{
+  font-weight: 600;
+  color: $primary;
+  font-size: 35px;
+}
+
