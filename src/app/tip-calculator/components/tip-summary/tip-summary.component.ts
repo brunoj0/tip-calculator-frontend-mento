@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tip-summary',
@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tip-summary.component.scss']
 })
 export class TipSummaryComponent implements OnInit {
+  @Output() reset = new EventEmitter<void>();
   @Input() total: string;
   @Input() tipAmount: string;
   constructor() { }
@@ -13,4 +14,7 @@ export class TipSummaryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  resetClicked() {
+    this.reset.emit()
+  }
 }

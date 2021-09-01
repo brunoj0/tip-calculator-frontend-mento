@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
+import { filter, map, startWith, tap } from 'rxjs/operators';
 import { forbiddenValueValidator } from '../shared/directives/forbidden-value.directive';
 import { Icon } from '../shared/enums/icon.enum';
 
@@ -16,33 +16,40 @@ export class TipCalculatorComponent implements OnInit {
   total$: Observable<string>;
   tipAmount$: Observable<string>;
 
-  formGroup = new FormGroup({
+  calculatorFormGroup = new FormGroup({
     bill: new FormControl(null,
-      forbiddenValueValidator("0")),
+      forbiddenValueValidator(0)),
     tipPercent: new FormControl(),
-    numberOfPeople: new FormControl(null, forbiddenValueValidator("0")),
+    numberOfPeople: new FormControl(null, forbiddenValueValidator(0)),
   })
 
   constructor() { }
 
   ngOnInit(): void {
     this.tipAmount$ = combineLatest([
-      this.formGroup.get('bill').valueChanges,
-      this.formGroup.get('tipPercent').valueChanges,
-      this.formGroup.get('numberOfPeople').valueChanges,
+      this.calculatorFormGroup.get('bill').valueChanges,
+      this.calculatorFormGroup.get('tipPercent').valueChanges,
+      this.calculatorFormGroup.get('numberOfPeople').valueChanges,
     ]).pipe(
+      tap(([bill, tipPercent, numberOfPeople]) => console.log(bill && tipPercent && numberOfPeople)),
+      filter(([bill, tipPercent, numberOfPeople]) => bill && tipPercent && numberOfPeople),
       map(([bill, tipPercent, numberOfPeople]) => parseInt(bill) * parseInt(tipPercent) / 100 / numberOfPeople),
       map(totalAmount => totalAmount.toFixed(2)),
-      startWith('0')
+      startWith('0.00')
     );
 
     this.total$ = combineLatest([
-      this.formGroup.get('bill').valueChanges,
-      this.formGroup.get('numberOfPeople').valueChanges
+      this.calculatorFormGroup.get('bill').valueChanges,
+      this.calculatorFormGroup.get('numberOfPeople').valueChanges
     ]).pipe(
+      filter(([bill, numberOfPeople]) => bill && numberOfPeople),
       map(([bill, numberOfPeople]) => parseInt(bill) / parseInt(numberOfPeople)),
       map(totalAmount => totalAmount.toFixed(2)),
-      startWith('0')
+      startWith('0.00')
     );
+  }
+
+  resetForm() {
+    this.calculatorFormGroup.reset();
   }
 }

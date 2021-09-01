@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Icon } from 'src/app/shared/enums/icon.enum';
 
 @Component({
@@ -16,33 +16,28 @@ export class AmountInputComponent implements OnInit, ControlValueAccessor {
   @Input() label: string;
   @Input() icon: Icon;
   @Input() error: boolean;
+  control = new FormControl();
+  _onTouched: Function;
 
   readonly iconsEnum = Icon;
 
-  inputValue = 0;
-  onChange: any;
+  inputValue = '';
+  onChange: Function;
   constructor() { }
 
 
   ngOnInit(): void {
   }
 
-  writeValue(obj: number): void {
-    console.log('aa');
-    this.inputValue = obj;
+  writeValue(value: any) {
+    this.control.setValue(value);
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
+  registerOnChange(fn: (value:any) => void) {
+    this.control.valueChanges.subscribe(fn);
   }
 
-  registerOnTouched(fn: any): void {
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-  }
-
-  inputValueChanged($event) {
-    this.onChange($event.target.value);
+  registerOnTouched(fn: Function) {
+    this._onTouched = fn;
   }
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="calculatorFormGroup">
 
   <div class="form-container">
     <app-amount-input
@@ -14,7 +14,7 @@
     </app-tip-percent-chooser>
     <app-amount-input
       [icon]="Icon.Person"
-      [error]="formGroup.get('numberOfPeople').errors?.forbiddenValue"
+      [error]="calculatorFormGroup.get('numberOfPeople').errors?.forbiddenValue"
       label="Number of People"
       formControlName="numberOfPeople">
     </app-amount-input>
@@ -23,6 +23,7 @@
   <app-tip-summary
    [total]="total$ | async"
    [tipAmount]="tipAmount$ | async"
+   (reset)="resetForm()"
   >
   </app-tip-summary>
 </form>
